@@ -12,9 +12,15 @@ O foco é praticar **automação e backend com Python**: agendamento de tarefas,
 
 ## Funcionalidades
 
+**Já implementadas**
+
+- Registro de sessões de estudo por matéria (`POST /estudos`)
+- Listagem de estudos, do mais recente ao mais antigo (`GET /estudos`)
+- Validação de dados com Pydantic (ex.: minutos maiores que zero)
+- Documentação interativa com Swagger
+
 **Planejadas**
 
-- Registro de sessões de estudo por matéria
 - Relatório semanal (tempo por matéria e por dia)
 - Controle de hábitos com cálculo de sequência (streak)
 - Lembretes e relatórios automáticos via notificação no celular
@@ -53,7 +59,7 @@ assistente-estudos/
 ## Roadmap
 
 - [x] Etapa 0: Estrutura inicial do projeto
-- [ ] Etapa 1: Registro de estudos (CRUD)
+- [x] Etapa 1: Registro e listagem de estudos
 - [ ] Etapa 2: Relatório semanal
 - [ ] Etapa 3: Interface para registrar e visualizar dados
 - [ ] Etapa 4: Controle de hábitos
@@ -109,7 +115,7 @@ A documentação interativa fica em `http://127.0.0.1:8000/docs`.
 
 ## Objetivo
 
-Aplicar na prática automação e desenvolvimento backend com Python, construindo uma ferramenta que eu uso no dia a dia e que evolui etapa por etapa.
+Aplicar na prática automação e desenvolvimento backend com Python, construindo uma ferramenta para usar no dia a dia e que evolui etapa por etapa.
 
 ## Autor
 
