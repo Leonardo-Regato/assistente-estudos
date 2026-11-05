@@ -60,7 +60,7 @@ assistente-estudos/
 
 - [x] Etapa 0: Estrutura inicial do projeto
 - [x] Etapa 1: Registro e listagem de estudos
-- [ ] Etapa 2: Relatório semanal
+- [x] Etapa 2: Relatório semanal
 - [ ] Etapa 3: Interface para registrar e visualizar dados
 - [ ] Etapa 4: Controle de hábitos
 - [ ] Etapa 5: Agendamento e notificações

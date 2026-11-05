@@ -13,3 +13,11 @@ class EstudoResposta(BaseModel):
     minutos: int
     data: date
     observacao: str | None = None
+
+class TotalMateria(BaseModel):
+    materia: str
+    total_minutos: int
+
+class TotalDia(BaseModel):
+    data: date
+    total_minutos: int
