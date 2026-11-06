@@ -15,5 +15,10 @@ def listar():
 
 @router.post("", status_code=201)
 def criar(estudo: EstudoCriar):
-    novo_id = inserir_estudo(estudo.materia, estudo.minutos, estudo.observacao)
+    novo_id = inserir_estudo(
+        materia=estudo.materia, 
+        minutos=estudo.minutos, 
+        observacao=estudo.observacao,
+        data=estudo.data,
+    )
     return {"id": novo_id}

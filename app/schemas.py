@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 class EstudoCriar(BaseModel):
     materia: str
     minutos: int = Field(gt=0)
+    data: date | None = None
     observacao: str | None = None
 
 class EstudoResposta(BaseModel):
