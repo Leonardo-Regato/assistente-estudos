@@ -1,5 +1,5 @@
 from datetime import date
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class EstudoCriar(BaseModel):
@@ -7,6 +7,13 @@ class EstudoCriar(BaseModel):
     minutos: int = Field(gt=0)
     data: date | None = None
     observacao: str | None = None
+
+    @field_validator("observacao")
+    @classmethod
+    def observacao_vazia_vira_none(cls, valor):
+        if valor is not None and valor.strip() == "":
+            return None
+        return valor
 
 class EstudoResposta(BaseModel):
     id: int
