@@ -15,6 +15,11 @@ class EstudoCriar(BaseModel):
             return None
         return valor
 
+    @field_validator("materia")
+    @classmethod
+    def padroniza_materia(cls, valor):
+        return valor.strip().title()
+
 class EstudoResposta(BaseModel):
     id: int
     materia: str
