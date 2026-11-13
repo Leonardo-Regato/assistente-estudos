@@ -31,7 +31,7 @@ def total_por_materia(dias=7):
                 """
                 SELECT materia, SUM(minutos) 
                 FROM estudos 
-                WHERE data >= CURRENT_DATE - %s
+                WHERE data >= CURRENT_DATE - (%s - 1)
                 GROUP BY materia 
                 ORDER BY SUM(minutos) DESC
                 """,
@@ -48,7 +48,7 @@ def total_por_dia(dias=7):
                 """
                 SELECT data, SUM(minutos) 
                 FROM estudos 
-                WHERE data >= CURRENT_DATE - %s
+                WHERE data >= CURRENT_DATE - (%s - 1)
                 GROUP BY data 
                 ORDER BY data 
 

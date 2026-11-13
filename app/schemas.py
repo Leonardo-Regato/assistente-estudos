@@ -13,12 +13,14 @@ class EstudoCriar(BaseModel):
     def observacao_vazia_vira_none(cls, valor):
         if valor is not None and valor.strip() == "":
             return None
-        return valor
+        return valor.strip()
 
     @field_validator("materia")
     @classmethod
     def padroniza_materia(cls, valor):
-        return valor.strip().title()
+        if valor.strip() == "":
+           raise ValueError("A matéria está vazia")
+        return valor.strip()
 
 class EstudoResposta(BaseModel):
     id: int
