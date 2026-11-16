@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Assistente de Estudos — acompanhe sua produtividade e evolução nos estudos."
+    >
+
+    <title>Assistente de Estudos</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript -->
+    <script type="module" src="js/app.js"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <i data-lucide="book-open"></i>
+                    </div>
+
+                    <span>Assistente de Estudos</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Navegação principal">
+
+                <span class="nav-section-title">MENU</span>
+
+                <a href="#dashboard" class="nav-link active" aria-current="page">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#historico" class="nav-link">
+                    <i data-lucide="history"></i>
+                    <span>Histórico</span>
+                </a>
+
+                <a href="#metas" class="nav-link disabled" aria-disabled="true">
+                    <i data-lucide="target"></i>
+                    <span>Metas</span>
+                    <span class="coming-soon">Em breve</span>
+                </a>
+
+                <a href="#spider-bot" class="nav-link disabled" aria-disabled="true">
+                    <i data-lucide="bot"></i>
+                    <span>Spider Bot</span>
+                    <span class="coming-soon">Em breve</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+
+                <button
+                    type="button"
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    aria-label="Alternar tema"
+                >
+                    <i data-lucide="sun-moon"></i>
+                    <span>Alternar tema</span>
+                </button>
+
+                <div class="sidebar-version">
+                    <span>Assistente de Estudos</span>
+                    <span>v1.0.0</span>
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content" id="dashboard">
+
+            <!-- HEADER -->
+            <header class="page-header">
+
+                <div class="header-title">
+                    <span class="breadcrumb">Visão geral</span>
+                    <h1>Dashboard</h1>
+                    <p>Acompanhe sua evolução nos estudos.</p>
+                </div>
+
+                <div class="header-actions">
+
+                    <label for="period-filter" class="sr-only">
+                        Período dos relatórios
+                    </label>
+
+                    <select id="period-filter" name="period">
+                        <option value="7">Últimos 7 dias</option>
+                        <option value="15">Últimos 15 dias</option>
+                        <option value="30">Últimos 30 dias</option>
+                    </select>
+
+                    <button
+                        type="button"
+                        class="btn-primary"
+                        id="open-study-modal"
+                    >
+                        <i data-lucide="plus"></i>
+                        <span>Nova Sessão</span>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <div class="dashboard-content">
+
+                <!-- INDICADORES -->
+                <section class="kpi-section" aria-label="Resumo dos estudos">
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-header">
+                            <span>Tempo estudado</span>
+                            <i data-lucide="clock"></i>
+                        </div>
+
+                        <div class="kpi-value">
+                            <strong id="total-hours">--</strong>
+                        </div>
+
+                        <span class="kpi-description">
+                            No período selecionado
+                        </span>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-header">
+                            <span>Sessões realizadas</span>
+                            <i data-lucide="book-check"></i>
+                        </div>
+
+                        <div class="kpi-value">
+                            <strong id="total-sessions">--</strong>
+                        </div>
+
+                        <span class="kpi-description">
+                            Registros de estudo
+                        </span>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-header">
+                            <span>Matéria em destaque</span>
+                            <i data-lucide="graduation-cap"></i>
+                        </div>
+
+                        <div class="kpi-value">
+                            <strong id="top-subject">--</strong>
+                        </div>
+
+                        <span class="kpi-description">
+                            Maior tempo dedicado
+                        </span>
+
+                    </article>
+
+                </section>
+
+
+                <!-- GRÁFICOS -->
+                <section class="charts-section" aria-label="Estatísticas dos estudos">
+
+                    <article class="chart-card">
+
+                        <div class="card-header">
+                            <div>
+                                <h2>Tempo de estudo</h2>
+                                <p>Evolução diária no período</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="icon-button"
+                                aria-label="Mais informações sobre o gráfico diário"
+                            >
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="daily-chart"></canvas>
+                        </div>
+
+                    </article>
+
+
+                    <article class="chart-card">
+
+                        <div class="card-header">
+                            <div>
+                                <h2>Distribuição por matéria</h2>
+                                <p>Tempo dedicado a cada matéria</p>
+                            </div>
+
+                            <button
+                                type="button"
+                                class="icon-button"
+                                aria-label="Mais informações sobre o gráfico por matéria"
+                            >
+                                <i data-lucide="more-horizontal"></i>
+                            </button>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="subject-chart"></canvas>
+                        </div>
+
+                    </article>
+
+                </section>
+
+
+                <!-- HISTÓRICO -->
+                <section class="history-section" id="historico">
+
+                    <div class="history-header">
+
+                        <div>
+                            <h2>Estudos recentes</h2>
+                            <p>Consulte suas últimas sessões registradas.</p>
+                        </div>
+
+                        <div class="history-actions">
+
+                            <div class="search-container">
+                                <i data-lucide="search"></i>
+
+                                <label for="subject-search" class="sr-only">
+                                    Buscar matéria
+                                </label>
+
+                                <input
+                                    type="search"
+                                    id="subject-search"
+                                    placeholder="Buscar matéria..."
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table class="study-table">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Matéria</th>
+                                    <th scope="col">Duração</th>
+                                    <th scope="col">Observação</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="study-history">
+
+                                <tr>
+                                    <td colspan="4" class="empty-state">
+                                        Carregando registros...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- MODAL DE REGISTRO -->
+    <dialog class="study-modal" id="study-modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Nova sessão de estudo</h2>
+                <p>Registre uma atividade realizada.</p>
+            </div>
+
+            <button
+                type="button"
+                class="icon-button"
+                id="close-study-modal"
+                aria-label="Fechar formulário"
+            >
+                <i data-lucide="x"></i>
+            </button>
+
+        </div>
+
+
+        <form id="study-form">
+
+            <div class="form-group">
+
+                <label for="subject">Matéria</label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    name="materia"
+                    placeholder="Ex: Python, Banco de Dados..."
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="duration">Duração (minutos)</label>
+
+                    <input
+                        type="number"
+                        id="duration"
+                        name="minutos"
+                        min="1"
+                        placeholder="Ex: 60"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="study-date">Data</label>
+
+                    <input
+                        type="date"
+                        id="study-date"
+                        name="data"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="observation">Observação</label>
+
+                <textarea
+                    id="observation"
+                    name="observacao"
+                    rows="3"
+                    placeholder="O que você estudou nesta sessão?"
+                ></textarea>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancel-study"
+                >
+                    Cancelar
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    id="save-study"
+                >
+                    Registrar estudo
+                </button>
+
+            </div>
+
+        </form>
+
+    </dialog>
+
+
+    <!-- ÁREA PARA NOTIFICAÇÕES -->
+    <div
+        class="notification-container"
+        id="notification-container"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+</body>
+</html>
