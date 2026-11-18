@@ -8,19 +8,23 @@ class EstudoCriar(BaseModel):
     data: date | None = None
     observacao: str | None = None
 
-    @field_validator("observacao")
-    @classmethod
-    def observacao_vazia_vira_none(cls, valor):
-        if valor is not None and valor.strip() == "":
+@field_validator("observacao")
+@classmethod
+def observacao_vazia_vira_none(cls, valor):
+    if valor is not None:
+        valor = valor.strip()
+        if valor == "":
             return None
-        return valor.strip()
+
+    return valor
 
     @field_validator("materia")
     @classmethod
     def padroniza_materia(cls, valor):
-        if valor.strip() == "":
+        valor = " ".join(valor.split())
+        if valor == "":
            raise ValueError("A matéria está vazia")
-        return valor.strip()
+        return valor
 
 class EstudoResposta(BaseModel):
     id: int

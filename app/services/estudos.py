@@ -29,10 +29,10 @@ def total_por_materia(dias=7):
         with conn.cursor() as cur:
             cur.execute(
                 """
-                SELECT materia, SUM(minutos) 
+                SELECT LOWER(materia), SUM(minutos) 
                 FROM estudos 
                 WHERE data >= CURRENT_DATE - (%s - 1)
-                GROUP BY materia 
+                GROUP BY LOWER(materia) 
                 ORDER BY SUM(minutos) DESC
                 """,
                 (dias,),
@@ -57,3 +57,17 @@ def total_por_dia(dias=7):
             )
             resultado = cur.fetchall()
     return resultado
+
+def excluir_estudo(id_materia):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                "DELETE FROM estudos WHERE id = %s RETURNING id",
+                (id_materia,)
+            )
+
+            resultado = cur.fetchone()
+
+            print("Registro excluído:", resultado)
+
+            return resultado is not None

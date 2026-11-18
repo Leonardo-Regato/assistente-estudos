@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from app.schemas import TotalMateria, TotalDia
 from app.services.estudos import total_por_dia, total_por_materia
 
-router = APIRouter(prefix="/relatorios", tags=["relátorios"])
+router = APIRouter(prefix="/relatorios", tags=["relatórios"])
 
 @router.get("/materias", response_model=list[TotalMateria])
 def por_materia(dias: int = Query(default=7, ge=1)):

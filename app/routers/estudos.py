@@ -1,6 +1,6 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.schemas import EstudoCriar, EstudoResposta
-from app.services.estudos import listar_estudos, inserir_estudo
+from app.services.estudos import listar_estudos, inserir_estudo, excluir_estudo
 
 router = APIRouter(prefix="/estudos", tags=["estudos"])
 
@@ -22,3 +22,9 @@ def criar(estudo: EstudoCriar):
         data=estudo.data,
     )
     return {"id": novo_id}
+
+@router.delete("/{id_materia}", status_code=204)
+def excluir_materia(id_materia: int):
+    resultado = excluir_estudo(id_materia)
+    if not resultado:
+        raise HTTPException(status_code=404, detail="O id não foi encontrado.")
